@@ -1,0 +1,60 @@
+{% extends "fbase.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Homepage {% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+
+    <h5>Welcome to ORA Store,{% if user.is_authenticated %} {{ user.username }} {% else %} visitor! {% endif %}</h5>
+
+    <p>
+        <strong>Total users registered: </strong> {{ count }}
+      </p>
+      <div class="row">
+        <div class="col-md-6">
+          <h1>Shopping made easy</h1>
+          <p>Shop at your own leisure time and we will take care of the delivery</p>
+          {% if user.is_authenticated %}
+          {% else %}
+          <a href="{% url 'signup' %}">
+          <button class="btn btn-primary">Register with Us</button>
+          </a>
+          {% endif %}
+        </div>
+        <div class="col-md-6">
+          <img src="https://via.placeholder.com/500x300" alt="Hero Image" class="img-fluid">
+        </div>
+      </div>
+
+    <h1>New Products</h1>
+    
+      <div class="row">
+        {% for product in products %}
+        <div class="col-md-4">
+            <a href="{% url 'product_detail' product.category.slug product.slug %}" style="text-decoration: none;">
+          <div class="card">
+            <img src="{{ product.image.url }}" alt="{{ product.title }} width="250" height="300"" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">{{ product.title }}</h5>
+              <span class="card-text" style="color:grey; font-size:small;">{{ product.owner }}</span><br>
+              <span class="card-text" style="color:orange;"><b>{{ product.rating }} &#9733;</b></span><br>
+              <p class="card-text"><strong>${{ product.price }}</strong></p>
+              
+            </div>
+          </div>
+        </a>
+        </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
+
+
+ 
+</body>
+</html>
