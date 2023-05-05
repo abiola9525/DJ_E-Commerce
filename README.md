@@ -1,4 +1,4 @@
-# DJANGO PLL E-COMMERCE WEBSITE
+# DJANGO E-COMMERCE WEBSITE
 
 This Project will have this below listed Pages
 
